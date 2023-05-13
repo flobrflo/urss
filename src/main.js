@@ -10,14 +10,37 @@ const routes = [
     { path: '/', redirect: "/login" },
     { path: '/login', component: LoginPage },
     { path: '/register', component: RegisterPage },
-    { path: '/dashboard', component: DashboardPage },
-]
+    {
+        path: '/dashboard',
+        component: DashboardPage, 
+        meta: {
+            requiresAuth: true
+        }
+    },
+];
   
 const router = createRouter({
     history: createWebHistory(),
     routes,
-})
+});
 
-const app = createApp(App)
-app.use(router, fireApp, fireAuth, fireAnalytics).mount('#app')
-app.mount('app')
+// manage routing if it requires auth
+router.beforeEach((to, from, next) => {
+    fireAuth.onAuthStateChanged(function(user) {
+        if (!to.matched.some(record => record.meta.requiresAuth)) {
+            next();
+            return;
+        }
+
+        if (!user) {
+            next({ path: '/login' });
+            return;
+        }
+
+        next();
+    });
+});
+
+const app = createApp(App);
+app.use(router, fireApp, fireAuth, fireAnalytics).mount('#app');
+app.mount('app');
