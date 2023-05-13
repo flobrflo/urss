@@ -10,21 +10,6 @@ import { getAuth, signOut } from "firebase/auth";
 
 export default {
   name: "DashboardPage",
-  mounted() {
-    const auth = getAuth();
-    console.log('user is', auth.currentUser);
-    if (
-      typeof auth.currentUser !== "undefined" &&
-      auth.currentUser !== null &&
-      typeof auth.currentUser.uid !== "undefined" &&
-      auth.currentUser.uid !== null &&
-      auth.currentUser.uid !== ""
-    ) {
-      return;
-    }
-
-    this.$router.replace("login");
-  },
   methods: {
     logout: function() {
       const auth = getAuth();
