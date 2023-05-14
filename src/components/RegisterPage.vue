@@ -1,7 +1,7 @@
 <template>
   <form @submit="register" class="register">
     <h2>Register</h2>
-    
+
     <div class="form-row">
       <div class="nomark"></div>
       <input type="email" v-model="email" placeholder="Email">
@@ -163,7 +163,6 @@ span {
     transform: rotate(45deg);
   }
 }
-
 .crossmark {
   position:relative;
   display:inline-block;
@@ -171,8 +170,8 @@ span {
   width: 20px;
   &:after {
     position: absolute;
-    content: '';
     display: block;
+    content: '';
     width: 20px;
     height: 0px;
     border: solid #E00;
@@ -183,8 +182,8 @@ span {
   }
   &:before {
     position: absolute;
-    content: '';
     display: block;
+    content: '';
     width: 20px;
     height: 0px;
     border: solid #E00;
