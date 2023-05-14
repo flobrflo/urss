@@ -17,6 +17,9 @@
       <div v-if="password_valid" class="checkmark"></div>
       <div v-if="password_valid != null && !password_valid" class="crossmark"></div>
     </div>
+    <div class="form-row" v-if="password_valid != null && !password_valid">
+      <div class="small">Password need to contain at least 8 caracter: min 1 Uppercase, min 1 Lowercase, min 1 Number and min 1 Special Char.</div>
+    </div>
 
     <div class="form-row">
       <div class="nomark"></div>
@@ -77,7 +80,7 @@ export default {
       }
     },
     validatePassword(password) {
-      if (password) {
+      if (/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()\-_=+{};:,<.>]).{8,}$/.test(password)) {
         this.password_valid = true;
       } else {
         this.password_valid = false;
@@ -140,6 +143,9 @@ span {
   display: block;
   margin-top: 20px;
   font-size: 11px;
+}
+.small {
+  font-size: 12px;
 }
 
 .nomark {
